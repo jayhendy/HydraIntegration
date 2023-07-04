@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/HandPositionTracker/Sample/TrackingScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/HandPositionTracker/Scenes/Drawing.unity
+    guid: fad9376d849b8c04e85a129c601d52c7
+  - enabled: 1
+    path: Assets/HydraIntegrationAssets/Scenes/HydraIntegration.unity
+    guid: 80109c5feb712dc4b998ac05e92a40c9
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 31772f19ac8e8b042ada8d5975ae7371, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: cd8ce0cd1462c744c91ea999371af4fb, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: af172173bba24a34dbbd14a99445ad35, type: 2}
