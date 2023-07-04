@@ -13,6 +13,7 @@ public class CoordinateAlignment : MonoBehaviour
      * 
      **/
 
+
     [SerializeField] private GameObject ovrCamera;
 
     [SerializeField] private TextMeshProUGUI tmp;
@@ -35,6 +36,7 @@ public class CoordinateAlignment : MonoBehaviour
      * Calibration Variables
      *  
      **/
+    public Vector3 Sensitivity = new Vector3( 0.001f, 0.001f, 0.001f );
 
     public static int CALIBRATION_SIZE = 100;
     private int calibrationCount;
@@ -44,8 +46,6 @@ public class CoordinateAlignment : MonoBehaviour
     private Vector3[] physicalPositions;
 
     private Matrix4x4 transformationMatrix;
-
-
 
     private void Start() 
     {
@@ -67,9 +67,7 @@ public class CoordinateAlignment : MonoBehaviour
                 ShowMappedPosition();
 
             } else {
-                
                 Calibrate();
-
             }
 
             handCenter.transform.position = GetHandCentroid(rightHandSkeleton);
@@ -85,16 +83,19 @@ public class CoordinateAlignment : MonoBehaviour
 
         } else {
             AddPointsToCalibration();
-    
+          
         }
     }
+
+
+
 
     private void AddPointsToCalibration() {
 
         Debug.Log(physicalPositions + "\n" + virtualPositions);
         tmp.text = calibrationCount + ", " + CALIBRATION_SIZE;
 
-        if (ovrCamera.GetComponent<HandTrackerCenter>().GetTrackedPosition() != Vector3.zero) {
+        if (GetHandCentroid(rightHandSkeleton) != Vector3.zero) {
 
             if (rightController.Trigger == 1) {
 
@@ -152,8 +153,9 @@ public class CoordinateAlignment : MonoBehaviour
         Vector3 newPhysicalPosition = rightController.Position; 
         Vector3 mappedPosition = ApplyTransformation(transformationMatrix, newPhysicalPosition);
         
-        calibratedHydraRight.transform.position = mappedPosition;
+        calibratedHydraRight.transform.position = mappedPosition + baseOffset;
         calibratedHydraRight.transform.rotation = rightController.Rotation;
+
         tmp.text = "Physical Position: " + newPhysicalPosition + "\nMapped Position: " + mappedPosition;
     }
 
